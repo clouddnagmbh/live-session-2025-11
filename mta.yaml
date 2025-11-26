@@ -1,5 +1,5 @@
 _schema-version: 3.3.0
-ID: live-session-2025-08
+ID: live-session-2025-11
 version: 1.0.0
 description: "A simple CAP project."
 parameters:
@@ -12,7 +12,7 @@ build-parameters:
         - npm ci
         - npx cds build --production
 modules:
-  - name: live-session-2025-08-srv
+  - name: live-session-2025-11-srv
     type: nodejs
     path: gen/srv
     parameters:
@@ -25,25 +25,25 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: live-session-2025-08-auth
-      - name: live-session-2025-08-db
-      - name: live-session-2025-08-destination
+      - name: live-session-2025-11-auth
+      - name: live-session-2025-11-db
+      - name: live-session-2025-11-destination
 
-  - name: live-session-2025-08-db-deployer
+  - name: live-session-2025-11-db-deployer
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: live-session-2025-08-db
+      - name: live-session-2025-11-db
 
-  - name: live-session-2025-08-app-deployer
+  - name: live-session-2025-11-app-deployer
     type: com.sap.application.content
     path: .
     requires:
-      - name: live-session-2025-08-auth
+      - name: live-session-2025-11-auth
       - name: srv-api
-      - name: live-session-2025-08-html5-repo-host
+      - name: live-session-2025-11-html5-repo-host
         parameters:
           content-target: true
           config:
@@ -51,7 +51,7 @@ modules:
     build-parameters:
       build-result: resources/
       requires:
-        - name: livesession202508products
+        - name: livesession202511products
           artifacts:
             - products.zip
           target-path: resources/
@@ -75,7 +75,7 @@ modules:
                 Type: HTTP
                 ProxyType: Internet
 
-  - name: livesession202508products
+  - name: livesession202511products
     type: html5
     path: app/products
     build-parameters:
@@ -86,19 +86,19 @@ modules:
         - npm run build
       supported-platforms: []
 
-  - name: live-session-2025-08-destinations
+  - name: live-session-2025-11-destinations
     type: com.sap.application.content
     requires:
-      - name: live-session-2025-08-auth
+      - name: live-session-2025-11-auth
         parameters:
           service-key:
-            name: live-session-2025-08-auth-key
-      - name: live-session-2025-08-html5-repo-host
+            name: live-session-2025-11-auth-key
+      - name: live-session-2025-11-html5-repo-host
         parameters:
           service-key:
-            name: live-session-2025-08-html5-repo-host-key
+            name: live-session-2025-11-html5-repo-host-key
       - name: srv-api
-      - name: live-session-2025-08-destination
+      - name: live-session-2025-11-destination
         parameters:
           content-target: true
     build-parameters:
@@ -108,32 +108,32 @@ modules:
         instance:
           existing_destinations_policy: update
           destinations:
-            - Name: live-session-2025-08-html5-repository
-              ServiceInstanceName: live-session-2025-08-html5-repo-host
-              ServiceKeyName: live-session-2025-08-html5-repo-host-key
-              sap.cloud.service: livesession202508.service
-            - Name: live-session-2025-08-auth
+            - Name: live-session-2025-11-html5-repository
+              ServiceInstanceName: live-session-2025-11-html5-repo-host
+              ServiceKeyName: live-session-2025-11-html5-repo-host-key
+              sap.cloud.service: livesession202511.service
+            - Name: live-session-2025-11-auth
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: live-session-2025-08-auth
-              ServiceKeyName: live-session-2025-08-auth-key
-              sap.cloud.service: livesession202508.service
+              ServiceInstanceName: live-session-2025-11-auth
+              ServiceKeyName: live-session-2025-11-auth-key
+              sap.cloud.service: livesession202511.service
 
 resources:
-  - name: live-session-2025-08-auth
+  - name: live-session-2025-11-auth
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: live-session-2025-08-${org}-${space}
+        xsappname: live-session-2025-11-${org}-${space}
         tenant-mode: dedicated
-  - name: live-session-2025-08-db
+  - name: live-session-2025-11-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: live-session-2025-08-destination
+  - name: live-session-2025-11-destination
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -159,12 +159,12 @@ resources:
           url: ~{srv-url}
           forwardAuthToken: true
 
-  - name: live-session-2025-08-html5-repo-host
+  - name: live-session-2025-11-html5-repo-host
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
-  - name: live-session-2025-08-html5-runtime
+  - name: live-session-2025-11-html5-runtime
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
