@@ -1,2 +1,3 @@
-# live-session-2025-08
+# live-session-2025-11
+
 SAP Cloud Application Programming Model: From Development to Deployment
