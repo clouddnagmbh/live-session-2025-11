@@ -65,13 +65,6 @@
         <Property Name="product_ID" Type="Edm.Guid"/>
       </EntityType>
       <Annotations Target="ProductCatalog.Products">
-        <Annotation Term="UI.SelectionFields">
-          <Collection>
-            <PropertyPath>name</PropertyPath>
-            <PropertyPath>description</PropertyPath>
-            <PropertyPath>price</PropertyPath>
-          </Collection>
-        </Annotation>
         <Annotation Term="UI.LineItem">
           <Collection>
             <Record Type="UI.DataField">

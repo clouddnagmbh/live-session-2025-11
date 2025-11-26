@@ -193,11 +193,6 @@
     },
     "ProductCatalog.Products": {
       "kind": "entity",
-      "@UI.SelectionFields": [
-        "name",
-        "description",
-        "price"
-      ],
       "@UI.LineItem": [
         {
           "$Type": "UI.DataField",

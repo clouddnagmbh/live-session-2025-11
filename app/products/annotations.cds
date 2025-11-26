@@ -1,12 +1,6 @@
 using ProductCatalog as service from '../../srv/service';
 
 annotate service.Products with @(
-    UI.SelectionFields                     : [
-        'name',
-        'description',
-        'price'
-    ],
-
     UI.LineItem                            : [
         {
             $Type: 'UI.DataField',
